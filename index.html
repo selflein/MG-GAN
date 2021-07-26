@@ -139,7 +139,290 @@
   <body>
     <br>
     <center>
-    <span style="font-size:42px">MG-GAN</span>
+    <span style="font-size:42px">MG-GAN: A Multi-Generator Model Preventing Out-of-Distribution Samples in Pedestrian Trajectory Prediction</span>
+    </center>
+    
+    <br>
+    <br>
+      <table align=center>
+    
+    <tr>
+       <span style="font-size:22px"><a href="https://dvl.in.tum.de/team/dendorfer/">Patrick Dendorfer</a></span>,
+      <span style="font-size:22px"><a href="">Sven Elflein</a></span>,
+      <span style="font-size:22px"><a href="https://dvl.in.tum.de/team/lealtaixe/">Laura Leal-Taixé</a></span>
+     
+   </tr>
 
+     <tr>
+       <td align=center style="font-size:22px">
+       <center>
+        Technical University Munich
+       </center>
+       </td>
+
+      </tr>
+    </table>
+    <table align=centerx >
+       <tr>
+        <td align=center>
+        <a href="http://iccv2021.thecvf.com/home">
+        <img src="images/logo_ICCV21.jpg" width="300">
+            <br>
+        <span style="font-size:28px">ICCV 2020 
+        </a>
+        </td>
+       <td align=center>
+           <a href="https://dvl.in.tum.de/">
+    <img src="https://www.wi.tum.de/wp-content/uploads/2019/06/LOGO_TUM-1.png" width="300">
+    </a>
+    </td>
+    </tr>
+    </table>
+
+        <br>
+         <table align=center  style="font-size:32px">
+          <tr>
+                
+                 
+<td><a href="https://arxiv.org/pdf/2010.01114.pdf">[Paper]</a></td>
+<td><a href="bibtex.txt">[Bibtex]</a> </td>
+<td>  <a href="">[Short Talk]</a> </td>
+<td> <a href="">[Long Talk]</a> </td>
+<td> <a href="https://github.com/selflein/MG-GAN/">[Github]</a> </td>              
+          </tr>
+             </table>
+
+        <br>
+        <br>
+        <br>
+              <center><h1>Overview Video</h1></center>
+              
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SoMbBNpAQOw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           
+          <center><h1>Abstract</h1></center>
+<p>
+ABSTRACT HERE
+</p>
+          
+
+          <hr>
+
+
+          <center><h1>Key Ideas</h1></center>
+        <p>
+            The key idea of our paper is to interpret the task of trajectory prediction as a <b>two-stage process</b>.
+        </p>
+
+
+               <table align=center>
+
+          <tr class="spaceUnder">
+            <td>
+              <img style="width:150px" src="images/overview/pic1.jpg"/>
+            </td>
+                   <td>
+            <img style="width:150px" src="images/overview/pic3.jpg"/>
+          </td>
+
+          <td><img style="width:150px" src="images/overview/pic4.jpg"/>
+          </td>
+         </tr>
+           <tr>
+
+
+              <td style="padding-left:20px; padding-right:20px;"><p><b>Original Scene:</b>
+                  <br>For a given scene we observe the past trajectory
+                  of the pedestrian and visual image of the scene</p></b></td>
+
+
+              <td style="padding-left:20px; padding-right:20px"><p><b>Stage 1: Intermediate Goal Prediction.</b>
+                  <br> We predict a discrete probability distribution of possible intermediate goals and sample goal
+              estimates from this distribution.</p></td>
+
+        <td style="padding-left:20px; padding-right:20px"><p><b>Stage 2: Routing.</b>
+            <br> We combine the estimated intermediate goal positions togehter with the
+            dynamic features of past trajectory and predict the future trajectory with the routing module</p></td>
+        </tr>
+
+      </table>
+                  <br>
+                  </p>
+        <p> The two-stage prediction process allows us to compose the task of pedestrian trajectory prediction into two stages: <b>Stage 1:</b> The selects a intermediate goal position that the pedestrian wants to reach n the the scene.
+        <b>Stage 2:</b> The decoder of the model is conditioned on the sampled goal position and the pedestrian routes towards that goal.
+
+        <hr>
+    <table align=center width=900>
+       <center><h1>Paper</h1></center>
+          <tr>
+              <td></td>
+            <td><a href="https://arxiv.org/pdf/2010.01114.pdf">
+                <img class="layered-paper-big" style="height:175px" src="./images/ACCV_thumbnail_png.png"></a></td>
+            <td>
+               <p style="text-align: center"> Goal-GAN: Multimodal Trajectory Prediction Based on Goal Position Estimation</p><br>
+            ACCV 2020  <a href = "http://accv2020.kyoto/"> <b> (Oral) </b> </a><br><br>
+                <a href="https://arxiv.org/pdf/2010.01114.pdf">[Paper]</a> &nbsp; &nbsp;
+                <a href="bibtex.txt">[Bibtex]</a> &nbsp; &nbsp;
+                <a href="https://github.com/dendorferpatrick/GoalGAN">[Github]</a>
+            <!-- [hosted on <a href="#">arXiv</a>]</a> -->
+              </td>
+              <td></td>
+        </tr>
+      </table>
+    <br>
+    <br>
+
+        <hr>
+          <center><h1>Goal Module</h1></center>
+         <table align=center>
+
+          <tr class="spaceUnder">
+            <td>
+               <img src = "images/goalgan_goalmodule.jpg" style="height:50%"/>
+            </td>
+
+              <td>
+
+                  <p>The key idea of our work is the Goal Module. The Goal Module estimates a discrete probability distribution over the possible intermediate goal positions in the scene. To do so, the network combines the visual features of the scene with the encoded motion of the pedestrian and outputs a probability map.
+                      We sample discrete goal positions from the estimated probability distribution that are passed to the decoder.
+                      We use the Gumbel Softmax Trick to backpropagating the gradients of the final loss through the stochastic process.</p>
+                  </td>
+          </tr>
+         </table>
+
+
+        <hr>
+        <center><h1>Model Overview</h1></center>   
+        
+        <img src="images/goalgan_overview.jpg" width=100%></img>
+
+
+                  <br>
+  <p>Our proposed Goal-GAN consists of three key components, as shown in Figure 2.
+<ul>
+  <li> <p><b>Motion Encoder (ME):</b>
+        <br>extracts  the  pedestrians’  dynamic  features  recur-sively with a long short-term memory
+        (LSTM) unit capturing the speed anddirection of motion of the past trajectory.</p>
+</li>
+<li><p><b>Goal Module (GM):</b>
+    <br>combines visual scene information and dynamic pedestrian features to predict
+the goal position for a given pedestrian. This module estimates
+the probability distribution over possible goal (target) positions,
+    which is in turn used to sample goal positions.</p></li>
+<li><p><b>Routing Module (RM):</b>
+    <br>generates the trajectory to the goal position sampled from the GM. While the goal position of the prediction is determined by the GM, the RM generates feasible paths to the predetermined goal
+    and reacts to obstacles along the way by using visual attention.</p></li>
+</ul>
+
+
+  <hr>
+      <table align=center>
+       <center><h1>Visualizing Multimodality</h1></center>
+          <p>To demonstrate the capability of our model to learn a multimodal distribution of trajectories we
+          create a synthetic dataset based on the <em>hyang 4</em> scene of the Stanford Drone Dataset.
+          In the GIFs below, we visualize the past trajectories, estimated probability and multiple sampled trajectories with
+              different intermediate goals.</p>
+          <tr class="spaceUnder">
+            <td>
+              <img style="width:280px" src="images/gif/gif_0.gif"/>
+            </td>
+            <td>
+              <img style="width:280px" src="images/gif/gif_2.gif"/>
+            </td>
+            <td>
+            <img style="width:280px" src="images/gif/gif_3.gif"/>
+          </td>
+        </tr>
+      </table>
+
+    <hr>
+
+
+          <center><h1>Experiment on Real Datasets</h1></center>
+        <p>We evaluate our model on the publicly available datasets ETH, UCY, and Stanford Drone Dataset
+            and achieve state-of-the-art results compared with the baselines.
+            <br><b>Visualizations:</b> We show the probability map for different trajectories in the test set. Hover over the images
+            to see the final trajectory predictions of the model.
+            To see the visual results, hover over the images.</p>
+         <h3>ETH and UCY Dataset</h3>
+         <table>
+          <tr class="spaceUnder">
+            <td colspan="2">
+          <img src="images/results_BIWI.png" style="height:200px">
+            </td>
+            <td>
+
+                <img onmouseover="this.src='images/hover_img/GAN_GOAL-hotel-12-div.jpg';"
+                     onmouseout="this.src='images/hover_img/GAN_GOAL-hotel-12-probability.jpg';"
+                     src="images/hover_img/GAN_GOAL-hotel-12-probability.jpg" style="height:200px">
+
+
+            </td>
+               <td>
+
+                <img onmouseover="this.src='images/hover_img/GAN_GOAL-zara2-21-div.jpg';"
+                     onmouseout="this.src='images/hover_img/GAN_GOAL-zara2-21-probability.jpg';"
+                     src="images/hover_img/GAN_GOAL-zara2-21-probability.jpg" style="height:200px">
+
+
+            </td>
+
+        </tr>
+
+
+      </table>
+
+         <h3><a href="https://cvgl.stanford.edu/projects/uav_data/">Stanford Drone Dataset</a></h3>
+         <img src="images/results_SDD.png" style="height:150px">
+        <br>
+        <br>
+        <table>
+          <tr class="spaceUnder">
+
+            <td>
+                 <img onmouseover="this.src='images/hover_img/GAN_GOAL-stanford-325-div.jpg';"
+                     onmouseout="this.src='images/hover_img/GAN_GOAL-stanford-325-probability.jpg';"
+                     src="images/hover_img/GAN_GOAL-stanford-325-probability.jpg" >
+
+            </td>
+            <td>
+                <img onmouseover="this.src='images/hover_img/GAN_GOAL-stanford-115-div.jpg';"
+                     onmouseout="this.src='images/hover_img/GAN_GOAL-stanford-115-probability.jpg';"
+                     src="images/hover_img/GAN_GOAL-stanford-115-probability.jpg" >
+
+          </td>
+                          <td>
+              <img onmouseover="this.src='images/hover_img/GAN_GOAL-stanford-296-div.jpg';"
+                     onmouseout="this.src='images/hover_img/GAN_GOAL-stanford-296-probability.jpg';"
+                     src="images/hover_img/GAN_GOAL-stanford-296-probability.jpg" >
+
+          </td>
+        </tr>
+        </table>
+
+
+
+   <hr>
+
+      <center><h1>Code</h1></center>
+      <tr>
+        <td>
+          <span style="font-size:28px">&nbsp;<a href='https://github.com/dendorferpatrick/GoalGAN'>[GitHub]</a>
+        </td>
+      <br>
+
+      <hr>
+            <table align=center width=950px>
+                <tr>
+                    <td>
+                      <left>
+                <center><h1>Acknowledgements</h1></center>
+                We specially thank Aljoša Ošep for his valuable feedback and insightful discussions. </br>
+               This webpage was inspired by <a href="https://richzhang.github.io/colorization/">Colorful Image Colorization</a>.
+            </left>
+        </td>
+        </tr>
+        </table>
+
+        <br><br>
 </body>
 </html>

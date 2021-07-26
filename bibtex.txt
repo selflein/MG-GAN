@@ -1,0 +1,6 @@
+@inproceedings{dendorfer21iccv, 
+title = {MG-GAN: A Multi-Generator Model Preventing Out-of-Distribution Samples in Pedestrian Trajectory Prediction}, 
+author={Patrick Dendorfer and Sven Elflein and Laura Leal-Taix{'e}}, 
+booktitle = {International Conference on Computer Vision (ICCV)}, 
+year = {2021}, 
+}
