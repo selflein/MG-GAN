@@ -84,7 +84,7 @@ def relative_to_abs(rel_traj, start_pos):
 
 
 def get_traj_4d(obsv_p, pred_p=None):
-    """ Augment tensors of positions into positions+velocity """
+    """Augment tensors of positions into positions+velocity"""
     obsv_v = obsv_p[:, 1:] - obsv_p[:, :-1]
     obsv_v = torch.cat([obsv_v[:, 0:1, :], obsv_v], dim=1)
     if pred_p is None:

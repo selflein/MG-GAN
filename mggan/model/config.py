@@ -25,11 +25,11 @@ def get_parser():
     )
     parser.add_argument("--keep_gen_steps", type=int, default=0)
     parser.add_argument("--top_k_test", type=int, default=20)
-    parser.add_argument("--val_every", type=int, default=20)
-    parser.add_argument("--save_every", type=int, default=20)
+    parser.add_argument("--val_every", type=int, default=1)
+    parser.add_argument("--save_every", type=int, default=5)
     parser.add_argument("--num_unrolling_steps", type=int, default=0)
     parser.add_argument("--debug", action="store_true")
-    parser.add_argument("--n_social_modules", type=int, default=0)
+    parser.add_argument("--n_social_modules", type=int, default=1)
     parser.add_argument("--g_lr", type=float, default=1e-3)
     parser.add_argument("--d_lr", type=float, default=1e-3)
     parser.add_argument("--sigma", type=float, default=1.0)
@@ -37,6 +37,7 @@ def get_parser():
         "--gan_type",
         type=str,
         choices=["probgan", "mgan", "infogan", "gan"],
+        default="mgan",
     )
     parser.add_argument(
         "--experiment",
@@ -44,12 +45,11 @@ def get_parser():
         choices=[
             "multi_generator",
             "discrete",
-            "multi_generator_latent",
-            "discrete_latent",
         ],
+        default="multi_generator",
     )
     parser.add_argument("--pool_type", type=str, default="sways")
-    parser.add_argument("--global_disc", action="store_true")
+    parser.add_argument("--global_disc", type=int, default=1)
     parser.add_argument("--unconditional", action="store_true")
     parser.add_argument("--augment", type=int, default=1)
     parser.add_argument("--noise_dim", type=int, default=8)
@@ -61,7 +61,7 @@ def get_parser():
         "--weighting_target",
         type=str,
         choices=["l2", "disc_scores", "endpoint", "mgan", "ml", "none"],
-        default="endpoint",
+        default="ml",
     )
 
     """ Tunable parameters """

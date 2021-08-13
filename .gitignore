@@ -1,5 +1,7 @@
 .idea/**
-data/**
+data
+logs
+
 notebooks
 notebooks/.ipynb_checkpoints
 run_slurm.sh

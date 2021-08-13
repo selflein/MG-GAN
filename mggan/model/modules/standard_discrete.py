@@ -8,7 +8,10 @@ from mggan.model.modules.social import SocialAttention
 from mggan.model.modules.social_gan import PoolHiddenNet
 from mggan.utils import make_mlp, get_global_noise
 from mggan.model.modules.common_modules import (
-    TrajectoryEncoder, RelativeDecoder, get_input, GeneratorOutput
+    TrajectoryEncoder,
+    RelativeDecoder,
+    get_input,
+    GeneratorOutput,
 )
 
 
@@ -221,7 +224,7 @@ class DiscreteLatentGenerator(nn.Module):
         return GeneratorOutput(out_dxdy, out_xy), net_chooser_out, sampled_gen_idxs
 
     def get_samples(self, enc_h, num_samples=5):
-        """ Returns generator indexes of shape (batch size, num samples) """
+        """Returns generator indexes of shape (batch size, num samples)"""
         if self.use_pinet:
             net_chooser_out = self.net_chooser(enc_h)
         else:

@@ -343,7 +343,7 @@ class TrajectoryDatasetEval(BaseDataset):
         xy = torch.from_numpy(xy).float()
         dxdy = xy[:, 1:] - xy[:, :-1]
         obs_traj = xy[:, : self.obs_len]
-        pred_traj = xy[:, self.obs_len:]
+        pred_traj = xy[:, self.obs_len :]
 
         feature_list = []
         cropped_img_list = []
@@ -364,7 +364,7 @@ class TrajectoryDatasetEval(BaseDataset):
             obs_traj,
             pred_traj,
             dxdy[:, : self.obs_len - 1],
-            dxdy[:, self.obs_len - 1:],
+            dxdy[:, self.obs_len - 1 :],
             scene_image,
             features,
             wall_p,

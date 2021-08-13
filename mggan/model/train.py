@@ -291,7 +291,7 @@ class PiNetMultiGeneratorGAN(MultiGeneratorGAN):
     def predict_expected(
         self, in_dxdy, in_xy, sub_batches, img=None, num=20, noise=None, mask=None
     ):
-        """ See predict(...) """
+        """See predict(...)"""
         self.G.eval()
 
         with torch.no_grad():
@@ -361,7 +361,7 @@ class PiNetMultiGeneratorGAN(MultiGeneratorGAN):
         eps=0.0,
         mask=None,
     ):
-        """ See predict(...) """
+        """See predict(...)"""
         self.G.eval()
 
         num_gens = self.G.n_gs
@@ -422,7 +422,7 @@ class PiNetMultiGeneratorGAN(MultiGeneratorGAN):
         eps=0.0,
         mask=None,
     ):
-        """ See predict(...) """
+        """See predict(...)"""
         self.G.eval()
 
         num_gens = self.G.n_gs
@@ -478,7 +478,7 @@ class PiNetMultiGeneratorGAN(MultiGeneratorGAN):
         debug=False,
         mask=None,
     ):
-        """ See predict(...) """
+        """See predict(...)"""
         self.G.eval()
         # Based on: Learning disconnected manifolds: no GAN’s land
         assert self.config.num_gens == 1, "Only implemented for single generator"

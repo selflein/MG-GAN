@@ -17,14 +17,17 @@ from mggan.evaluation import (
 )
 
 parser = ArgumentParser()
-parser.add_argument("--split", default="all")
+parser.add_argument("--split", choices=["upper", "lower", "all"], default="all")
 parser.add_argument("--device", default="cuda")
-parser.add_argument("--radius", type=float, default=2.0)
+parser.add_argument("--radius", type=float, default=3.0)
 parser.add_argument("--model_path")
 parser.add_argument("--output_folder", required=True)
-parser.add_argument("--checkpoint", required=True)
-parser.add_argument("--phase", required=True, choices=["train", "val", "test"])
+parser.add_argument("--checkpoint", required=True, default="best")
+parser.add_argument(
+    "--phase", required=True, choices=["train", "val", "test"], default="test"
+)
 parser.add_argument("--eval_set", default=None)
+parser.add_argument("--num_preds", default=20, type=int)
 parser.add_argument(
     "--pred_strat",
     default="all",
@@ -38,7 +41,7 @@ if __name__ == "__main__":
 
     phase = args.phase
     show_plots = False
-    num_preds_list = list(range(1, 21))
+    num_preds_list = list(range(1, args.num_preds))
 
     checkpoint = args.checkpoint
     if args.pred_strat == "all":
@@ -105,14 +108,14 @@ if __name__ == "__main__":
         all_results["Generator params"].append(config.num_gen_parameters)
         all_results["Prediction strategy"].append(pred_strat)
         all_results["Mode"].append(config.experiment)
-        all_results["Use MGAN"].append(config.gan_type)
+        all_results["Use Classifier"].append(config.gan_type)
         all_results["Prior"].append(config.weighting_target)
         all_results["Dataset"].append(config.dataset)
-        all_results["maximization samples"].append(config.num_samples)
-        all_results["expectation samples"].append(config.num_expectation_samples)
+        all_results["Maximization Samples"].append(config.num_samples)
+        all_results["Expectation Samples"].append(config.num_expectation_samples)
         all_results["L2 loss weight"].append(config.l2_loss_weight)
-        all_results["clf loss weight"].append(config.clf_loss_weight)
-        all_results["sigma"].append(config.sigma)
+        all_results["Clf loss weight"].append(config.clf_loss_weight)
+        all_results["Sigma"].append(config.sigma)
 
         metric_dict = {}
         preds = model.get_predictions(

@@ -107,9 +107,7 @@ class AttentionGlobal(AttentionNetwork):
         self.init_cnn()
 
     def forward(self, features):
-        visual_features = self.CNN(features)["Features"].permute(
-            0, 2, 3, 1
-        )
+        visual_features = self.CNN(features)["Features"].permute(0, 2, 3, 1)
         batch_size, hh, w, c = visual_features.size()
         visual_features = visual_features.view(batch_size, -1, c)
         attention_scores = self.cnn_attention(visual_features)
