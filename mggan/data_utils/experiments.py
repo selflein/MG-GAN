@@ -169,7 +169,6 @@ class Experiment:
         )
 
     def plot_points(self):
-
         self.plot_image()
         plt.scatter(self.pixel_data[:, 3], self.pixel_data[:, 2])
         plt.show()

@@ -17,23 +17,56 @@ from mggan.evaluation import (
 )
 
 parser = ArgumentParser()
-parser.add_argument("--split", choices=["upper", "lower", "all"], default="all")
+parser.add_argument(
+    "--split",
+    choices=["upper", "lower", "all"],
+    default="all",
+    help="Only relevant for synthetic dataset. Evaluate on upper or lower intersection.",
+)
 parser.add_argument("--device", default="cuda")
-parser.add_argument("--radius", type=float, default=3.0)
-parser.add_argument("--model_path")
+parser.add_argument(
+    "--radius",
+    type=float,
+    default=3.0,
+    help="Radius to be used for the computation of Precision and Recall metrics.",
+)
+parser.add_argument(
+    "--model_path",
+    help="Path to the model folder where the `version_*` directories of the models "
+    "to evaluate are located.",
+)
 parser.add_argument("--output_folder", required=True)
-parser.add_argument("--checkpoint", required=True, default="best")
+parser.add_argument(
+    "--checkpoint",
+    required=True,
+    default="best",
+    help="Either the epoch or 'best' for the model checkpoint to use for evaluation.",
+)
 parser.add_argument(
     "--phase", required=True, choices=["train", "val", "test"], default="test"
 )
-parser.add_argument("--eval_set", default=None)
-parser.add_argument("--num_preds", default=20, type=int)
+parser.add_argument(
+    "--eval_set", default=None, help="Evaluate on the specified dataset."
+)
+parser.add_argument(
+    "--num_preds",
+    default=20,
+    type=int,
+    help="Maximum number of predictions to use for evaluation.",
+)
 parser.add_argument(
     "--pred_strat",
     default="all",
     choices=["all", "sampling", "expected", "smart_expected", "rejection"],
+    help="The different sampling strategies for multi-generator models described in"
+    " the paper. 'rejection' performs the sampling technique from "
+    "'https://arxiv.org/abs/2006.04596' for single generator models.",
 )
-parser.add_argument("--no-precision-recall", action="store_true")
+parser.add_argument(
+    "--no-precision-recall",
+    action="store_true",
+    help="If specified does not evaluate precision and recall.",
+)
 
 
 if __name__ == "__main__":

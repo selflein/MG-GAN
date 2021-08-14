@@ -39,10 +39,11 @@ conda create -f environment.yml -n mggan
 conda activate mggan
 ```
 
-Then, download the datasets using the script which will create a folder `./data/datasets`
+Then, download the datasets (`data.zip`) from [here](https://github.com/selflein/MG-GAN/releases) and unzip in the root of this repository
 ```
-bash scripts/download_dataset.sh
-```
+unzip data.zip
+``` 
+which will create a folder `./data/datasets`.
 
 ## Training
 
@@ -62,7 +63,7 @@ For evaluation of metrics (*ADE*, *FDE*, *Precison*, *Recall*) for `k=1` to `k=2
 python scripts/evaluate.py --model_path <path_to_model_directory>  --output_folder <folder_to_store_result_csv>
 ```
 
-One can use `--eval-set <dataset_name>` to evaluate models on other test sets than the one of the dataset the model was trained on. This is useful to evaluate the BIWI models on the Garden of Forking Paths dataset (`gofp`) for which we report results in the paper.
+One can use `--eval-set <dataset_name>` to evaluate models on other test sets than the dataset the model was trained on. This is useful to evaluate the BIWI models on the Garden of Forking Paths dataset (`gofp`) for which we report results in the paper.
 
 
 ## Pre-trained models

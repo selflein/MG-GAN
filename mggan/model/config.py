@@ -6,7 +6,21 @@ def get_parser():
 
     parser.add_argument("--name", type=str, default="test")
     parser.add_argument("--log_dir", type=str, default="./logs/")
-    parser.add_argument("--dataset", type=str, default="stanford_synthetic")
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        default="stanford_synthetic",
+        choices=[
+            "hotel",
+            "eth",
+            "zara1",
+            "zara2",
+            "univ",
+            "social_stanford_synthetic",
+            "stanford",
+            "gofp",
+        ],
+    )
     parser.add_argument("--gpus", type=str, default="0")
     parser.add_argument("--workers", type=int, default=0)
     parser.add_argument("--batch_size", type=int, default=8)
