@@ -2,7 +2,7 @@
 
 This repository contains the code for the paper
 
-> [MG-GAN: A Multi-Generator Model Preventing Out-of-Distribution Samples in Pedestrian Trajectory Prediction]() \
+> [MG-GAN: A Multi-Generator Model Preventing Out-of-Distribution Samples in Pedestrian Trajectory Prediction](https://arxiv.org/abs/2108.09274) \
 Patrick Dendorfer*, Sven Elflein*, Laura Leal-Taixé (* equal contribution) \
 International Conference on Computer Vision (ICCV), 2021
 
