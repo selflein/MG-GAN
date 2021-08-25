@@ -131,7 +131,7 @@
 
 <html>
   <head>
-        <title>MG-GAN</title>
+        <title>MG-GAN || ICCV21</title>
         <meta property="og:title" content="sceneflow" />
      
   </head>
@@ -149,7 +149,7 @@
     
     <tr>
        <span style="font-size:22px"><a href="https://dvl.in.tum.de/team/dendorfer/">Patrick Dendorfer*</a></span>,
-      <span style="font-size:22px"><a href="">Sven Elflein*</a></span>,
+      <span style="font-size:22px"><a href="https://selflein.github.io/aboutme/">Sven Elflein*</a></span>,
       <span style="font-size:22px"><a href="https://dvl.in.tum.de/team/lealtaixe/">Laura Leal-Taixé</a></span>
       <span><tiny> (*equal contribution)</tiny></span>
      
@@ -165,14 +165,15 @@
       </tr>
 
     </table>
+<br>
 
-    <table align=centerx >
+    <table align=centerx>
        <tr>
         <td align=center>
         <a href="http://iccv2021.thecvf.com/home">
         <img src="images/logo_ICCV21.jpg" width="300">
             <br>
-        <span style="font-size:28px">ICCV 2020 
+        <span style="font-size:28px">ICCV 2021
         </a>
         </td>
        <td align=center>
@@ -188,7 +189,7 @@
           <tr>
                 
                  
-<td><a href="https://arxiv.org/pdf/2010.01114.pdf">[Paper]</a></td>
+<td><a href="https://arxiv.org/pdf/2108.09274.pdf">[Paper]</a></td>
 <td><a href="bibtex.txt">[Bibtex]</a> </td>
 <td>  <a href="">[Short Talk]</a> </td>
 <td> <a href="">[Long Talk]</a> </td>
@@ -196,6 +197,199 @@
           </tr>
              </table>
 
-        <br><br>
+<!-- ABSTRACT  -->
+<center><h1>Abstract</h1></center>
+<p>
+    Pedestrian trajectory prediction is challenging due to its uncertain and multimodal nature. 
+    While generative adversarial networks can learn a distribution over future trajectories, they tend to predict out-of-distribution samples when the distribution of future trajectories is a mixture of multiple, possibly disconnected modes. 
+</p>
+<p>
+    To address this issue, we propose a multi-generator model for pedestrian trajectory prediction. 
+    Each generator specializes in learning a distribution over trajectories routing towards one of the primary modes in the scene, while a second network learns a categorical distribution over these generators, conditioned on the dynamics and scene input. This architecture allows us to effectively sample from specialized generators and to significantly reduce the out-of-distribution samples compared to single generator methods.
+</p>
+<hr>
+
+
+<!-- Motivation -->
+<center><h1>Motivation</h1></center>
+
+
+
+       <table align=center>
+
+  <tr class="spaceUnder">
+    <td>
+      <img style="width:150px" src="images/overview/teaser1.png"/>
+    </td>
+           <td>
+    <img style="width:150px" src="images/overview/teaser2.png"/>
+  </td>
+
+  <td><img style="width:150px" src="images/overview/teaser3.png"/>
+  </td>
+ </tr>
+   <tr>
+
+
+      <td style="text-align:center; padding-left:20px; padding-right:20px;"><p><b><center>(a) Target Distribution</center></b></td>
+
+
+      <td style="text-align:center; padding-left:20px; padding-right:20px">
+        <p><b><center>(b) Single Generator Distribution</center></b></td>
+            
+<td style="text-align:center; padding-left:20px; padding-right:20px">
+    <p><b><center>(c) Multi-Generator Distribution</center></b></td>
+</tr>
+
+</table>
+          <br>
+
+<p>
+    Consider a pedestrian reaching a crossroad. The pedestrian can choose three different directions: right, left, and straight. 
+<br>
+    In those cases, the distribution (a) of realistic trajectories is spatially multimodal and the support of the distribution is disconnected.
+<br> 
+    To model human motion, we have to use stochastic methods to estimate the future trajectory.
+
+</p>
+<p> 
+    Current state-of-the-art methods try to learn a multi-modal distribution with a single generator GANs. 
+    However, we find that they assign a probability to regions that have no support in the ground-truth distribution 
+    and therefore predict so-called out-of-distribution samples. 
+</p>
+<p> 
+    The problem emerges because Neural networks are continuous functions that preserve the topology of the latent space. Therefore, a single generator model is theoretically incapable of learning a multimodal distribution on disconnected supports. 
+</p>
+<p>
+    In this paper, we overcome the limitations of single generator GANs and introduce a multi-generator model to solve the problem of generating out-of-distribution samples. The mixture model is discontinuous where each can specialize on one particular mode of the distribution. 
+</p>
+<hr>
+
+<!-- PAPER  -->
+<table align=center width=900>
+    <center><h1>Paper</h1></center>
+    <tr>
+        <td></td>
+        <td><a href="https://arxiv.org/pdf/2010.01114.pdf">
+            <img class="layered-paper-big" style="height:175px" src="./images/ICCV_thumbnail_png.png"></a></td>
+        <td>
+        <p style="text-align: center"> MG-GAN: A Multi-Generator Model Preventing Out-of-Distribution Samples in Pedestrian Trajectory Prediction</p><br>
+        ICCV 2021  <a href = "http://iccv2021.thecvf.com/home"> <b> (Poster) </b> </a><br><br>
+            <a href="https://arxiv.org/pdf/2108.09274.pdf">[Paper]</a> &nbsp; &nbsp;
+            <a href="bibtex.txt">[Bibtex]</a> &nbsp; &nbsp;
+            <a href="https://github.com/selflein/MG-GAN/">[Github]</a>
+        <!-- [hosted on <a href="#">arXiv</a>]</a> -->
+        </td>
+        <td></td>
+    </tr>
+</table>
+<br>
+<br>
+<hr>
+<!-- MODEL OVERVIEW -->
+<center><h1>Model Overview</h1></center>   
+
+<img src="images/architecture/architecture.png" width=100%></img>
+
+
+          <br>
+<p>The key idea of our paper is to decompose the task of trajectory prediction into two stages. 
+<p> <b>(1)</b> We encode the scene and assess the scenario. 
+Based on the observations, we predict the inherent modes in the scene and activate the required generators.
+<br>
+<b>(2)</b> Once selected, we pass the encoding to the selected generators and generate the prediction.
+</p>    
+<p>Our proposed MG-GAN consists of several key components:</p>
+<ul>
+<li> <p><b>Encoder:</b>
+<br>
+The encoder extracts  the visual scene information and dynamic features of the pedestrians using recurrent neural networks.</p>
+</li>
+<li><p><b>Attention Modules:</b>
+<br>
+The encoded features are used to compute physical and social soft attention.
+</p></li>
+<li><p><b>Path Mode Network (PM):</b>
+<br>
+The Path Mode network consumes the features and attention vectors and estimates a probability distribution over the different generators.
+</p></li>
+<li><p><b>Multiple Generators:</b>
+<br>
+Each generator has its own set of parameters and consists out of a recurrent decoder. 
+Our training procedure encourages each generator to focus on one particular mode of the output distribution.
+</p></li>
+</ul>
+<p>
+<br>The mixture model is discontinuous where each can specialize on one particular mode of the distribution. 
+<br>In contrast to existing multi-generator methods, we propose the Path mode Network, which selects the best-suited generators for a new scene conditioned on the input observation.
+<br> For more information about the training procedure, results and implementation we encourage you to read or <a href="https://arxiv.org/pdf/2108.09274.pdf">paper</a></p>.
+</p>    
+<br>
+
+<hr>
+<!-- VISUALIZATIONS -->
+<center><h1>Visualizations</h1></center>
+<table>
+    <tr class="spaceUnder">
+
+    <td>
+        <img src="images/visualizations/GAN_1.png" width="80%">
+
+    </td>
+    <td>
+    <img src="images/visualizations/GAN_2.png" width="80%">
+
+    </td>
+    <td>
+    <img src="images/visualizations/MGGAN_1.png" width="80%">
+
+    </td>
+    <td>
+    <img src="images/visualizations/MGGAN_2.png" width="80%">
+
+    </td>
+  </tr>
+  <tr> 
+    <td colspan="2"><b>(a) Single Generator GAN</b></td>
+    <td colspan="2"><b>(b) MG-GAN (ours)</b></td>
+  </tr>
+  </table>
+<p>
+    The figure shows two scenarios containing a junction with 3 modes and an interacting pedestrian (white). 
+    <br>
+    Visually, we observe how the GAN L2 baseline (a) produces many out-of-distribution samples while our method learns the gt distribution (b). 
+    Here, we can see the probabilities for the different generators estimated by the PM Network that allow us to select and de-activate particular generators for the scene.
+    <br> Each generator is specialized to cover one particular mode in the scene. Trajectories of the same generator are displayed in the same color.
+</p>
+
+<br>
+<!-- CODE  -->
+<hr>
+<center><h1>Code</h1></center>
+<p>The source code of our model and pre-trained models reported in the paper are publically available.
+<tr>
+  <td>
+    <span style="font-size:28px">&nbsp;<a href='https://github.com/selflein/MG-GAN/'>[GitHub]</a>
+  </td>
+<br>
+<br>
+<hr>
+<table align=center width=950px>
+    <tr>
+        <td>
+          <left>
+    <center><h1>Acknowledgements</h1></center>
+<p>
+    This project was funded by the Humboldt Foundation through the Sofja Kovalevskaja Award. We highly thank 
+    Aljoša Ošep for helpful discussions, constructive feedback, and proofreading.
+</br>
+   This webpage was inspired by <a href="https://richzhang.github.io/colorization/">Colorful Image Colorization</a>.
+</p>
+</left>
+</td>
+</tr>
+</table>
+
+<br><br>
 </body>
 </html>
