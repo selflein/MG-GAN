@@ -47,10 +47,10 @@ which will create a folder `./data/datasets`.
 
 ## Training
 
-Models can be trained using the script `bayespred/model/train.py` using the following command
+Models can be trained using the script `mggan/model/train.py` using the following command
 
 ```bash
-python bayespred/models/pinet_multi_generator/train.py --name <name_of_experiment> --num_gens <number_of_generators>  --dataset <dataset_name> --epochs 50
+python mggan/models/pinet_multi_generator/train.py --name <name_of_experiment> --num_gens <number_of_generators>  --dataset <dataset_name> --epochs 50
 ```
 
 This generates a output folder in `./logs/<name_of_experiment>` with Tensorboard logs and  the model checkpoints. You can use `tensorboard --logdir ./logs/<name_of_experiment>` to monitor the training process.
