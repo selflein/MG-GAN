@@ -23,7 +23,7 @@ def get_parser():
     )
     parser.add_argument("--gpus", type=str, default="0")
     parser.add_argument("--workers", type=int, default=0)
-    parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument("--batch_size", type=int, default=2)
     parser.opt_list(
         "--beta1", type=float, default=0.5, options=[0.1, 0.5, 0.9], tunable=False
     )
